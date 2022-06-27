@@ -43,6 +43,20 @@ const controls = new OrbitControls(camera, renderer.domElement)
 // better approach will be to setup a recursive func that gives us an infine loop
 // that calls the render method automatically
 
+
+function addStar() {
+  const geometry = new THREE.SphereGeometry(0.25, 24, 24)
+  const material = new THREE.MeshStandardMaterial({ color: 0xffffff })
+  const star = new THREE.Mesh(geometry, material)
+
+  const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100))
+
+  star.position.set(x, y, z)
+  scene.add(star)
+}
+
+
+Array(200).fill().forEach(addStar)
 function animate() {
   requestAnimationFrame(animate) // to tell the browser that we wanna perform animation
   torus.rotation.x += 0.01
